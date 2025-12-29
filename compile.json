@@ -1,0 +1,65 @@
+{
+  "nginx_version": "1.28.1",
+  "git_commit": {
+    "hash": "95078974cfe998ec4095ac2c504c5c92bbc9a326",
+    "date": "2025-12-22 23:05:27 +0400",
+    "message": "nginx-1.28.1-RELEASE"
+  },
+  "compiler": {
+    "name": "gcc",
+    "version": "11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04.2)"
+  },
+  "compile_time": "2025-12-29T11:25:00+00:00",
+  "binary_info": {
+    "path": "objs/nginx",
+    "size": "6.9M"
+  },
+  "compile_commands": {
+    "configure": "./configure --prefix=/usr/local/nginx --with-http_ssl_module --with-http_realip_module --with-http_gzip_static_module --with-http_stub_status_module --with-http_v2_module --with-http_v3_module --with-stream --with-stream_ssl_module",
+    "build": "make -j$(nproc)",
+    "install": "make install"
+  },
+  "configure_arguments": [
+    "--prefix=/usr/local/nginx",
+    "--with-http_ssl_module",
+    "--with-http_realip_module",
+    "--with-http_gzip_static_module",
+    "--with-http_stub_status_module",
+    "--with-http_v2_module",
+    "--with-http_v3_module",
+    "--with-stream",
+    "--with-stream_ssl_module"
+  ],
+  "dependencies": {
+    "pcre": "PCRE2 (system library)",
+    "openssl": "OpenSSL 3.0.2 15 Mar 2022",
+    "zlib": "zlib (system library)"
+  },
+  "modules": {
+    "http": {
+      "ssl": true,
+      "realip": true,
+      "gzip_static": true,
+      "stub_status": true,
+      "v2": true,
+      "v3": true
+    },
+    "stream": {
+      "enabled": true,
+      "ssl": true
+    }
+  },
+  "system_info": {
+    "os": "Linux 5.19.0-50-generic",
+    "platform": "x86_64",
+    "build_platform": "Linux"
+  },
+  "features": {
+    "tls_sni": true,
+    "epoll": true,
+    "sendfile": true,
+    "sendfile64": true,
+    "prctl": true,
+    "ipv6": true
+  }
+}
