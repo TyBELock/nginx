@@ -1,7 +1,7 @@
 /*
  * @Date: 2026-01-12 14:40:30
  * @LastEditors: GiddyPoet
- * @LastEditTime: 2026-01-12 17:37:42
+ * @LastEditTime: 2026-01-14 17:16:58
  */
 #include "ngx_module.h"
 #include <ngx_config.h>
@@ -10,12 +10,18 @@
 #include <time.h>
 
 
-static ngx_int_t ngx_httlp_hello_handler(ngx_http_request_t * r) {
+static ngx_int_t ngx_http_hello_handler(ngx_http_request_t * r) {
     ngx_buf_t * b;
     ngx_chain_t out;
+    ngx_int_t rc = 0;
 
     if (!(r->method & NGX_HTTP_GET)) {
         return NGX_HTTP_NOT_ALLOWED;
+    }
+
+    rc = ngx_http_discard_request_body(r);
+    if (rc != NGX_OK) {
+        return rc;
     }
 
     /* 设置响应头部 */
@@ -60,7 +66,7 @@ static char * ngx_http_hello_set(ngx_conf_t * cf, ngx_command_t * cmd, void * co
     clconf = ngx_http_conf_get_module_loc_conf(cf, ngx_http_core_module);
 
     /* TODO: INIT handler */
-    clconf->handler = ngx_httlp_hello_handler;
+    clconf->handler = ngx_http_hello_handler;
 
     return NGX_CONF_OK;
 }
@@ -77,6 +83,7 @@ static ngx_command_t ngx_http_hello_commands [] = {
 
     ngx_null_command,
 };
+
 
 static ngx_http_module_t ngx_http_hello_module_ctx = {
     NULL,                          /* preconfiguration */
@@ -108,3 +115,5 @@ ngx_module_t ngx_http_hello_module = {
 };
 
 ngx_module_t ngx_http_hello_module;
+
+/* ngx_module_t -> ngx_http_module_t -> set -> */
